@@ -63,79 +63,6 @@ type_effect "/// NOVEL VIRTUAL ENVIRONMENT CREATED"
 python3 -m venv venv
 source venv/bin/activate
 
-# Define the export commands for environment rc files
-export_commands="export PATH=/usr/lib/x86_64-linux-gnu/openmpi/bin:\$PATH\nexport LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/openmpi/lib:\$LD_LIBRARY_PATH"
-
-# Detect the shell and set the rc file accordingly
-if [ -n "$BASH_VERSION" ]; then
-    shell="bash"
-    rc_file="$HOME/.bashrc"
-elif [ -n "$ZSH_VERSION" ]; then
-    shell="zsh"
-    rc_file="$HOME/.zshrc"
-elif [ -n "$FISH_VERSION" ]; then
-    shell="fish"
-    rc_file="$HOME/.config/fish/config.fish"
-elif [ -n "$CSH_VERSION" ] || [ -n "$TCSH_VERSION" ]; then
-    shell="csh"
-    rc_file="$HOME/.cshrc"
-elif [ -n "$KSH_VERSION" ]; then
-    shell="ksh"
-    rc_file="$HOME/.kshrc"
-else
-    type_effect "/// UNSUPPORTED SHELL. PLEASE USE Bash, Zsh, Fish, Csh/Tcsh or Ksh."
-    exit 
-fi
-
-# Remove existing OpenMPI export commands if present
-if [ "$shell" = "fish" ]; then
-    # Fish shell uses a different syntax
-    sed -i '/set -x PATH \/usr\/lib\/x86_64-linux-gnu\/openmpi\/bin.*/d' "$rc_file"
-    sed -i '/set -x LD_LIBRARY_PATH \/usr\/lib\/x86_64-linux-gnu\/openmpi\/lib.*/d' "$rc_file"
-else
-    sed -i '/export PATH=\/usr\/lib\/x86_64-linux-gnu\/openmpi\/bin.*/d' "$rc_file"
-    sed -i '/export LD_LIBRARY_PATH=\/usr\/lib\/x86_64-linux-gnu\/openmpi\/lib.*/d' "$rc_file"
-fi
-
-# Append new export commands to the shell's rc file if not already present
-if [ "$shell" = "fish" ]; then
-    # Fish shell uses a different syntax
-    fish_export_commands="set -x PATH /usr/lib/x86_64-linux-gnu/openmpi/bin \$PATH\nset -x LD_LIBRARY_PATH /usr/lib/x86_64-linux-gnu/openmpi/lib \$LD_LIBRARY_PATH"
-    if ! grep -Fxq "$fish_export_commands" "$rc_file"; then
-        echo -e "\n# OpenMPI library paths" >> "$rc_file"
-        echo -e "$fish_export_commands" >> "$rc_file"
-        echo "Export commands added to $rc_file"
-    else
-        echo "Export commands already present in $rc_file"
-    fi
-else
-    if ! grep -Fxq "$export_commands" "$rc_file"; then
-        echo -e "\n# OpenMPI library paths" >> "$rc_file"
-        echo -e "$export_commands" >> "$rc_file"
-        echo "Export commands added to $rc_file"
-    else
-        echo "Export commands already present in $rc_file"
-    fi
-fi
-
-# Source the rc file to apply changes to the current session
-case "$shell" in
-    bash|zsh|ksh)
-        source "$rc_file"
-        ;;
-    fish)
-        source "$rc_file"
-        ;;
-    csh|tcsh)
-        source "$rc_file"
-        ;;
-    *)
-        type_effect "/// UNSUPPORTED SHELL. PLEASE USE Bash, Zsh, Fish, Csh/Tcsh or Ksh."
-        ;;
-esac
-
-type_effect "/// ENVIRONMENT VARIABLES SET"
-
 # Inject clean requirements.txt
 # Replace MANIFEST.in with 3rd Eye Lab's modded version
 type_effect "/// INJECTING 3RD EYE LAB'S MODIFIED REQUIREMENTS.TXT AKA 'A Kiss from above'"
@@ -249,4 +176,4 @@ if [ -d "venv" ]; then
     rm -rf venv
 fi
 
-type_effect "BUILD COMPLETE. . . INITIALIZING IMAGE CREATION"
+type_effect "/// BUILD COMPLETE. . . INITIALIZING IMAGE CREATION"
