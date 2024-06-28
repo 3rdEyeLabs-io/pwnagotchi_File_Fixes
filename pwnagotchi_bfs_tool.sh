@@ -1,19 +1,5 @@
 #!/bin/zsh
 
-# Print ASCII art banner
-cat << "EOF"
-╔╦╗┬ ┬┬┬─┐┌┬┐  ╔═╗┬ ┬┌─┐  ╦  ┌─┐┌┐ ┌─┐  ╔═╗┬─┐┌─┐┌─┐┌─┐┌┐┌┌┬┐┌─┐
- ║ ├─┤│├┬┘ ││  ║╣ └┬┘├┤   ║  ├─┤├┴┐└─┐  ╠═╝├┬┘├┤ └─┐├┤ │││ │ └─┐
- ╩ ┴ ┴┴┴└──┴┘  ╚═╝ ┴ └─┘  ╩═╝┴ ┴└─┘└─┘  ╩  ┴└─└─┘└─┘└─┘┘└┘ ┴ └─┘
-╔╦╗┬ ┬┌─┐  ╔═╗┬ ┬┌┐┌┌─┐┌─┐┌─┐┌┬┐┌─┐┬ ┬┬  ╦┌┬┐┌─┐┌─┐┌─┐          
- ║ ├─┤├┤   ╠═╝││││││├─┤│ ┬│ │ │ │  ├─┤│  ║│││├─┤│ ┬├┤           
- ╩ ┴ ┴└─┘  ╩  └┴┘┘└┘┴ ┴└─┘└─┘ ┴ └─┘┴ ┴┴  ╩┴ ┴┴ ┴└─┘└─┘          
-╔╗ ┬ ┬┬┬  ┌┬┐┌─┐┬─┐  ╔╦╗┌─┐┌─┐┬                                 
-╠╩╗│ │││   ││├┤ ├┬┘   ║ │ ││ ││                                 
-╚═╝└─┘┴┴─┘─┴┘└─┘┴└─   ╩ └─┘└─┘┴─┘                               
-
-EOF
-
 # Function to simulate typing effect
 type_effect() {
   local message="$1"
@@ -26,8 +12,46 @@ type_effect() {
 
 # Exit immediately if a command exits with a non-zero status
 set -e
+set -u
 
-# Welcome message
+# Print ASCII art banner & Welcome message
+cat << "EOF"
+ _____         _   _____                                
+|____ |       | | |  ___|                               
+    / /_ __ __| | | |__ _   _  ___                      
+    \ \ '__/ _` | |  __| | | |/ _ \                     
+.___/ / | | (_| | | |__| |_| |  __/                     
+\____/|_|  \__,_| \____/\__, |\___|                     
+                         __/ |                          
+                        |___/                           
+ _           _         _                                
+| |         | |       ( )                               
+| |     __ _| |__  ___|/                                
+| |    / _` | '_ \/ __|                                 
+| |___| (_| | |_) \__ \                                 
+\_____/\__,_|_.__/|___/                                                                                    
+______                                  _       _     _ 
+| ___ \                                | |     | |   (_)
+| |_/ /_      ___ __   __ _  __ _  ___ | |_ ___| |__  _ 
+|  __/\ \ /\ / / '_ \ / _` |/ _` |/ _ \| __/ __| '_ \| |
+| |    \ V  V /| | | | (_| | (_| | (_) | || (__| | | | |
+\_|     \_/\_/ |_| |_|\__,_|\__, |\___/ \__\___|_| |_|_|
+                             __/ |                      
+                            |___/                       
+______       _ _     _  ______                          
+| ___ \     (_) |   | | |  ___|                         
+| |_/ /_   _ _| | __| | | |_ _ __ ___  _ __ ___         
+| ___ \ | | | | |/ _` | |  _| '__/ _ \| '_ ` _ \        
+| |_/ / |_| | | | (_| | | | | | | (_) | | | | | |       
+\____/ \__,_|_|_|\__,_| \_| |_|  \___/|_| |_| |_|                                                             
+ _____                            _____           _     
+/  ___|                          |_   _|         | |    
+\ `--.  ___  _   _ _ __ ___ ___    | | ___   ___ | |    
+ `--. \/ _ \| | | | '__/ __/ _ \   | |/ _ \ / _ \| |    
+/\__/ / (_) | |_| | | | (_|  __/   | | (_) | (_) | |    
+\____/ \___/ \__,_|_|  \___\___|   \_/\___/ \___/|_|    
+                                                        
+EOF
 
 type_effect "/// Pwnagotchi 'BUILD FROM SOURCE' sequence initiated..."
 
@@ -38,23 +62,14 @@ PWNAGOTCHI_DIR="./pwnagotchi"
 if [ -d "$PWNAGOTCHI_DIR" ]; then
     type_effect "/// ROGUE DIRECTORY IDENTIFIED"
     sudo rm -r "$PWNAGOTCHI_DIR"
-    type_effect "/// ROGUE DIRECTORY DESTROYED"
-else
-    type_effect "/// NO ROGUE DIRECTORY"
-fi
-
-# Clone the Pwnagotchi repository and navigate into it
-type_effect "/// CLONING PWNAGOTCHI REPOSITORY"
+    type_effect "/// ROGUE DIRECTORY DESTROYED"GE TIME!!!(⌐■_■)
 git clone https://github.com/evilsocket/pwnagotchi.git 
 cd pwnagotchi
 type_effect "/// TERMINAL ACCESS GRANTED"
 
-# Replace MANIFEST.in with 3rd Eye Lab's modded version
+# Replace MANIFEST.in & requirements.txt with 3rd Eye Lab's FIXED versions
 type_effect "/// INJECTING 3RD EYE LAB'S MUTATED PAYLOAD"
 wget -O MANIFEST.in https://raw.githubusercontent.com/3rdEyeLabs-io/pwnagotchi_File_Fixes/main/MANIFEST.in
-
-# Inject clean requirements.txt
-# Replace MANIFEST.in with 3rd Eye Lab's modded version
 wget -O requirements.txt https://raw.githubusercontent.com/3rdEyeLabs-io/pwnagotchi_File_Fixes/main/requirements.txt
 
 # Remove previous virtual environment if it exists
@@ -110,14 +125,6 @@ pip install tensorflow
 #pip install smbus2
 #pip install Pillow
 #pip install spidev
-#pip install gast
-#pip install flask
-#pip install flask-cors
-#pip install flask-wtf
-#pip install dbus-python
-#pip install toml
-#pip install python-dateutil
-#pip install websockets
 
 # Install dependencies from requirements.txt individually (with version)
 
@@ -129,10 +136,6 @@ pip install gym==0.14.0
 #pip install scipy==1.3.1
 pip install stable-baselines==2.7.0
 #pip install tensorflow==1.13.1
-pip install tensorflow-estimator==1.14.0
-pip install tweepy==3.7.0
-pip install file-read-backwards==2.0.0
-#pip install numpy==1.20.2
 #pip install numpy==1.17.2
 pip install inky==1.2.0
 pip install smbus2==0.3.0
@@ -166,7 +169,7 @@ fi
 type_effect "/// WHEEL BE RIGHT BACK"
 pip install dist/*.whl
 
-# (OR) Install fron setup.py (NOT RECOMMENDED - comment pip install dist/*.whl)
+# (OR) Install from setup.py (NOT RECOMMENDED - comment pip install dist/*.whl)
 #python3 setup.py install
 
 # Clean up __pycache__ directories and .pyc files with sudo
