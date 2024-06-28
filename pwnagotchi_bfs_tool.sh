@@ -62,7 +62,7 @@ PWNAGOTCHI_DIR="./pwnagotchi"
 if [ -d "$PWNAGOTCHI_DIR" ]; then
     type_effect "/// ROGUE DIRECTORY IDENTIFIED"
     sudo rm -r "$PWNAGOTCHI_DIR"
-    type_effect "/// ROGUE DIRECTORY DESTROYED"GE TIME!!!(⌐■_■)
+    type_effect "/// ROGUE DIRECTORY DESTROYED"
 git clone https://github.com/evilsocket/pwnagotchi.git 
 cd pwnagotchi
 type_effect "/// TERMINAL ACCESS GRANTED"
