@@ -94,7 +94,7 @@ pip install mpi4py --no-cache-dir
 
 # Install system dependencies with sudo to avoid multiple password prompts
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-sudo apt install -y python3 python3-setuptools python3-wheel python3-pip git screen libffi-dev libssl-dev libpcap-dev build-essential gfortran libopenblas-dev liblapack-dev libatlas-base-dev libdbus-1-dev libglib2.0-dev libfreetype6-dev libpng-dev libbz2-dev zlib1g-dev liblzma-dev wget python3-dev libxml2-dev libxslt1-dev libreadline-dev libsqlite3-dev curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libgdbm-dev libc6-dev libdb-dev libbz2-dev liblzma-dev libxml2-dev libxslt1-dev libreadline-dev libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev libgdbm-dev libc6-dev libdb-dev openmpi-bin libopenmpi-dev
+sudo apt install -y python3 python3-setuptools python3-wheel python3-pip git screen libffi-dev libssl-dev libpcap-dev build-essential gfortran libopenblas-dev liblapack-dev libatlas-base-dev libdbus-1-dev libglib2.0-dev libfreetype6-dev libpng-dev libbz2-dev zlib1g-dev liblzma-dev wget python3-dev libxml2-dev libxslt1-dev libreadline-dev libsqlite3-dev curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libgdbm-dev libc6-dev libdb-dev libbz2-dev liblzma-dev libxml2-dev libxslt1-dev libreadline-dev libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev libgdbm-dev libc6-dev libdb-dev openmpi-bin libopenmpi-dev libssl-dev libffi-dev
 sudo apt purge python3-numpy -y  # Remove existing package
 sudo apt install --reinstall python3-numpy -y  # Reinstall with clean options
 
