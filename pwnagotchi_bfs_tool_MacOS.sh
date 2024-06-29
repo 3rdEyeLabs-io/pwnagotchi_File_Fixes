@@ -129,3 +129,6 @@ if [ -d "venv" ]; then
 fi
 
 type_effect "/// IT'S PWNAGE TIME!!!(⌐■_■)"
+
+# Ensure script terminates properly
+exit 0
