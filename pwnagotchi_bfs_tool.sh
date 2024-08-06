@@ -1,4 +1,8 @@
-#!/bin/bash
+#!/bin/bash -e
+
+if [ -f "${ROOTFS_DIR}/etc/ld.so.preload" ]; then
+   mv "${ROOTFS_DIR}/etc/ld.so.preload" "${ROOTFS_DIR}/etc/ld.so.preload.disabled"
+fi
 
 # Function to simulate typing effect
 type_effect() {
@@ -67,6 +71,8 @@ git clone https://github.com/evilsocket/pwnagotchi.git
 cd pwnagotchi
 type_effect "/// TERMINAL ACCESS GRANTED"
 
+fi
+
 # Replace MANIFEST.in & requirements.txt with 3rd Eye Lab's FIXED versions
 type_effect "/// INJECTING 3RD EYE LAB'S MUTATED PAYLOAD"
 wget -O MANIFEST.in https://raw.githubusercontent.com/3rdEyeLabs-io/pwnagotchi_File_Fixes/main/MANIFEST.in
@@ -88,15 +94,18 @@ source venv/bin/activate
 
 type_effect "/// LOADING WEAPONRY"
 
+# PIP UPGRADE!!!!!
+python3 -m pip install --upgrade pip
+
 # PIP install of mpi4py
-pip uninstall -y mpi4py
+#pip uninstall -y mpi4py
 pip install mpi4py --no-cache-dir
 
 # Install system dependencies with sudo to avoid multiple password prompts
 sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
-sudo apt install -y python3 python3-setuptools python3-wheel python3-pip git screen libffi-dev libssl-dev libpcap-dev build-essential gfortran libopenblas-dev liblapack-dev libatlas-base-dev libdbus-1-dev libglib2.0-dev libfreetype6-dev libpng-dev libbz2-dev zlib1g-dev liblzma-dev wget python3-dev libxml2-dev libxslt1-dev libreadline-dev libsqlite3-dev curl llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libgdbm-dev libc6-dev libdb-dev libbz2-dev liblzma-dev libxml2-dev libxslt1-dev libreadline-dev libsqlite3-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev libgdbm-dev libc6-dev libdb-dev openmpi-bin libopenmpi-dev libssl-dev libffi-dev
-sudo apt purge python3-numpy -y  # Remove existing package
-sudo apt install --reinstall python3-numpy -y  # Reinstall with clean options
+sudo apt install -y python3 python3-setuptools python3-wheel python3-pip git screen libffi-dev libssl-dev libpcap-dev build-essential gfortran libopenblas-dev liblapack-dev libatlas-base-dev libdbus-1-dev libglib2.0-dev libfreetype6-dev libpng-dev zlib1g-dev liblzma-dev wget python3-dev libxml2-dev libxslt1-dev libreadline-dev libsqlite3-dev curl llvm libgdbm-dev libc6-dev libbz2-dev libncurses5-dev libncursesw5-dev xz-utils tk-dev openmpi-bin libopenmpi-dev libffi-dev
+#sudo apt purge python3-numpy -y  # Remove existing package
+sudo apt install python3-numpy -y  # Reinstall with clean options
 
 # Force reinstall numpy using pip
 #pip install --force-reinstall numpy
@@ -105,7 +114,6 @@ type_effect "/// Dum(b)Py INSTALLED"
 
 # PIP install of NumPy and additional dependencies
 type_effect "/// HITTING THE PIP"
-python3 -m pip install --upgrade pip
 pip install build wheel setuptools
 
 # Install dependencies from requirements.txt individually (no version)
